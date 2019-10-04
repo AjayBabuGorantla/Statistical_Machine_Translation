@@ -1,3 +1,4 @@
+import os
 import re
 from argparse import ArgumentParser
 
@@ -25,6 +26,9 @@ def main():
 
     args = vars(parser.parse_args())
     csv_filepath = args['csv_filepath']
+
+    if not os.path.exists(csv_filepath):
+        raise FileNotFoundError("{} path not found".format(csv_filepath))
 
     new_filepath = '{}_sanitized.csv'.format(csv_filepath.rsplit('.', 1)[0])
     print("New File Path is {}".format(new_filepath))
